@@ -42,4 +42,4 @@ Additionally, think whether all the content from *Upgrade with nRF Connect for M
 
 ## Zip and email
 
-Your task is successfully completed when we receive a zipped repository where the content from  *Upgrade with nRF Connect for Mobile* is part of the RST source files and of the resulting HTML output.
+Your task is completed when we receive a zipped repository where the content from  *Upgrade with nRF Connect for Mobile* is part of the RST source files and of the resulting HTML output.
