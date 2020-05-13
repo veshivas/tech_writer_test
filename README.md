@@ -40,6 +40,6 @@ When you are done with the task, it is also important that you check the result 
 
 Additionally, think whether all the content from *Upgrade with nRF Connect for Mobile* should be kept in one chunk or whether it makes sense to divide it and put it in more than one RST file. Remember that you can either create new RST files in the ``doc`` folder or you can choose to only edit the existing ones.
 
-## Task objective
+## Zip and email
 
 Your task is successfully completed when we receive a zipped repository where the content from  *Upgrade with nRF Connect for Mobile* is part of the RST source files and of the resulting HTML output.
