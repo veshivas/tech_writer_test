@@ -14,4 +14,5 @@ Then, update the firmware by following the instructions in :ref:`updating_firmwa
    :maxdepth: 1
 
    preparing
+   upgrade
    updating_firmware
