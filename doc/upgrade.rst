@@ -31,6 +31,7 @@ Connect for mobile`_ installed to run DFU.
 .. image:: images/image3.png
    :width: 1.84in
    :height: 3.28in
+   :align: center
 
 Activating DFU mode
 --------------------
@@ -48,7 +49,11 @@ Activating DFU mode
     scanning. A device with the same name but “DFU” added appears in the list of
     discovered devices.
 
-|image1| |image2|
+.. list-table::
+    :widths: 50 50
+
+    * - |image1|
+      - |image2|
 
 Running DFU
 ------------
@@ -64,14 +69,18 @@ Uploading the ZIP file
 .. image:: images/image4.png
    :width: 1.88in
    :height: 3.36in
+   :align: center
 
 6. The package is now uploaded to the device
 
 .. |image1| image:: images/image1.png
    :width: 1.86in
    :height: 3.31in
+   :align: middle
+
 .. |image2| image:: images/image2.png
    :width: 1.87in
    :height: 3.33in
+   :align: middle
 
 .. _nRF Connect for mobile: https://www.nordicsemi.com/eng/Products/Nordic-mobile-Apps/nRF-Connect-for-mobile-previously-called-nRF-Master-Control-Panel
