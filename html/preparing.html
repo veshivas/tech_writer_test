@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preparing for OTA-DFU &#8212; Test repo  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Upgrading with nRF Connect for Mobile" href="upgrade.html" />
+    <link rel="prev" title="Over-the-air device firmware update (OTA-DFU)" href="ota_dfu.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="upgrade.html" title="Upgrading with nRF Connect for Mobile"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ota_dfu.html" title="Over-the-air device firmware update (OTA-DFU)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Test repo  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ota_dfu.html" accesskey="U">Over-the-air device firmware update (OTA-DFU)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Preparing for OTA-DFU</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="preparing-for-ota-dfu">
+<span id="preparing"></span><h1>Preparing for OTA-DFU<a class="headerlink" href="#preparing-for-ota-dfu" title="Permalink to this headline">¶</a></h1>
+<p>The following procedures assume that you want to update the device with your own custom firmware.
+To do this, you must complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Generate your own public and private key pair.</p></li>
+<li><p>Generate a device firmware update (DFU) package that is signed with your key and contains your custom firmware.</p></li>
+</ol>
+<p>To complete these steps, you require <a class="reference external" href="https://github.com/NordicSemiconductor/pc-nrfutil">nRF Util</a>.</p>
+<div class="section" id="generating-a-key-pair">
+<h2>Generating a key pair<a class="headerlink" href="#generating-a-key-pair" title="Permalink to this headline">¶</a></h2>
+<p>Cryptographic keys are required to sign and validate a DFU package.
+Before generating your custom DFU package, you must generate your own private-public key pair.</p>
+<p>To generate a new private key, run the following command with nrfutil installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nrfutil</span> <span class="n">keys</span> <span class="n">generate</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+<p>The command generates a new key file in the folder where you ran the command.
+Make sure you keep this key secret.</p>
+<p>Now, generate a public key from the private one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nrfutil</span> <span class="n">keys</span> <span class="n">display</span> <span class="o">--</span><span class="n">key</span> <span class="n">pk</span> <span class="o">--</span><span class="nb">format</span> <span class="n">code</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span> <span class="o">--</span><span class="n">out_file</span> <span class="n">dfu_public_key</span><span class="o">.</span><span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generating-a-dfu-package">
+<h2>Generating a DFU package<a class="headerlink" href="#generating-a-dfu-package" title="Permalink to this headline">¶</a></h2>
+<p>Run <code class="docutils literal notranslate"><span class="pre">nrfutil</span> <span class="pre">pkg</span> <span class="pre">generate</span></code> to generate a zip file that you can later use to update the device firmware.
+You can find detailed information about the command in the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_nrfutil/UG/nrfutil/nrfutil_pkg.html">nRF Util documentation</a>.
+For example, enter the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nrfutil</span> <span class="n">pkg</span> <span class="n">generate</span> <span class="o">--</span><span class="n">application</span> <span class="o">&lt;</span><span class="n">path_to_hex_file</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">application</span><span class="o">-</span><span class="n">version</span> <span class="mi">0</span> <span class="o">--</span><span class="n">hw</span><span class="o">-</span><span class="n">version</span> <span class="mi">52</span> <span class="o">--</span><span class="n">sd</span><span class="o">-</span><span class="n">req</span> <span class="mh">0x98</span> <span class="o">--</span><span class="n">key</span><span class="o">-</span><span class="n">file</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span> <span class="n">dfu</span><span class="o">-</span><span class="n">app</span><span class="o">.</span><span class="n">zip</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Preparing for OTA-DFU</a><ul>
+<li><a class="reference internal" href="#generating-a-key-pair">Generating a key pair</a></li>
+<li><a class="reference internal" href="#generating-a-dfu-package">Generating a DFU package</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ota_dfu.html"
+                        title="previous chapter">Over-the-air device firmware update (OTA-DFU)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="upgrade.html"
+                        title="next chapter">Upgrading with nRF Connect for Mobile</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/preparing.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="upgrade.html" title="Upgrading with nRF Connect for Mobile"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ota_dfu.html" title="Over-the-air device firmware update (OTA-DFU)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Test repo  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ota_dfu.html" >Over-the-air device firmware update (OTA-DFU)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Preparing for OTA-DFU</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Nordic Semiconductor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+    </div>
+  </body>
+</html>

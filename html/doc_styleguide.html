@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentation style guide &#8212; Test repo  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Building the documentation" href="building_the_docs.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="building_the_docs.html" title="Building the documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Test repo  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Documentation style guide</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="documentation-style-guide">
+<span id="doc-styleguide"></span><h1>Documentation style guide<a class="headerlink" href="#documentation-style-guide" title="Permalink to this headline">¶</a></h1>
+<p>See Zephyr’s <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/guides/documentation/index.html#doc-guidelines">Documentation Guidelines</a>  for a short introduction to RST and, most importantly, to the conventions used in Zephyr.
+More information about RST is available in the <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">reStructuredText Primer</a>.</p>
+<p>The documentation follows the Zephyr style guide, and adds a few more restrictive rules that are described below.</p>
+<div class="section" id="titles-and-headings">
+<h2>Titles and headings<a class="headerlink" href="#titles-and-headings" title="Permalink to this headline">¶</a></h2>
+<p>Keep titles and headings as short and to the point as possible.</p>
+<div class="section" id="titles">
+<h3>Titles<a class="headerlink" href="#titles" title="Permalink to this headline">¶</a></h3>
+<p>Mention the module name in the title and within the RST tag of the page, which is defined in the first line of the RST file.
+For example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1 .. _lib_aws_fota:
+2
+3 AWS FOTA
+4 ########
+</pre></div>
+</div>
+<p>Do not repeat the section name in the titles of the subpages.
+For example, when adding a sample or library, do not mention <em>sample</em> or <em>library</em> in the title of the page.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Correct title</p></th>
+<th class="head"><p>Incorrect title</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nRF9160: Secure Services</p></td>
+<td><p>nRF9160: Secure Services Sample</p></td>
+</tr>
+<tr class="row-odd"><td><p>DK Button and LED</p></td>
+<td><p>DK Button and LED library</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="headings">
+<h3>Headings<a class="headerlink" href="#headings" title="Permalink to this headline">¶</a></h3>
+<p>Headings use sentence case, which means that the first word is capitalized, and the following words use normal capitalization.
+The only exception are proper names, for example Bluetooth specification terminology (see last entry in the following table).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 51%" />
+<col style="width: 49%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Correct heading</p></th>
+<th class="head"><p>Incorrect heading</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CC file format</p></td>
+<td><p>CC File Format</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sending shell commands</p></td>
+<td><p>Sending Shell Commands</p></td>
+</tr>
+<tr class="row-even"><td><p>GATT Human Interface Device (HID) Service Client</p></td>
+<td><p>GATT Human Interface Device (HID) service client</p></td>
+</tr>
+</tbody>
+</table>
+<p>Do not use consecutive headings without intervening text.</p>
+</div>
+</div>
+<div class="section" id="rst-file-formatting">
+<h2>RST file formatting<a class="headerlink" href="#rst-file-formatting" title="Permalink to this headline">¶</a></h2>
+<p>For readability reasons, start every sentence on a new line in the source files and do not add line breaks within the sentence.
+In the output, consecutive lines without blank lines in between are combined into one paragraph.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the conceptual documentation written in RST, you can have more than 80 characters per line.
+The requirement for 80 characters per line applies only to the code documentation written in doxygen.</p>
+</div>
+<p>The sentences must not end with a space.
+Trim trailing spaces before committing your changes.</p>
+<p>Each RST file must end with one blank line.</p>
+</div>
+<div class="section" id="content-highlighting">
+<h2>Content highlighting<a class="headerlink" href="#content-highlighting" title="Permalink to this headline">¶</a></h2>
+<p>Use the following highlighing rules in the RST conceptual documentation:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Markup</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Usage criteria</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*emphasis*</span></code></p></td>
+<td><p><em>relaying</em></p></td>
+<td><p>Emphasis or new terms.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">``code``</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">update</span></code></p></td>
+<td><p>Code within text.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">**PCB**</span></code></p></td>
+<td><p><strong>SW3</strong></p></td>
+<td><p>PCB names.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">:guilabel:`GUI`</span></code></p></td>
+<td><p><span class="guilabel">Cancel</span></p></td>
+<td><p>Clickable graphical user interface elements.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:file:`filename`</span></code></p></td>
+<td><p><code class="file docutils literal notranslate"><span class="pre">conf.py</span></code></p></td>
+<td><p>Filenames, file paths, directory names, and file extensions.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not use the following markup for italics: <code class="docutils literal notranslate"><span class="pre">`..`</span></code>.</p>
+</div>
+<p>For readability reasons, do not use any code highlighting for titles of other pages or headings when they are mentioned in the text.
+For example, do not write “The <code class="docutils literal notranslate"><span class="pre">bl_crypto</span></code> library”.
+Use the complete name of the library: “The bootloader crypto library”, and always link to the page you mention.
+If the page you are linking to is mentioned several times in the text, place the link on the first occurrence and on every occurrence where linking to the page is useful.</p>
+</div>
+<div class="section" id="tables">
+<h2>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h2>
+<p>Follow Zephyr’s <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/guides/documentation/index.html#doc-guidelines">Documentation Guidelines</a> for tables.
+Do not add table titles to describe the table.
+Instead, make sure to introduce the table with a short sentence that describes the table contents.
+For example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The following table lists something.
+
+.. list-table::
+    :widths: 15 20 40
+    :header-rows: 1
+
+    * - Heading 1
+      - Heading 2
+      - Heading 3
+    * - body row 1, column 1
+      - body row 1, column 2
+      - body row 1, column 3
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Documentation style guide</a><ul>
+<li><a class="reference internal" href="#titles-and-headings">Titles and headings</a><ul>
+<li><a class="reference internal" href="#titles">Titles</a></li>
+<li><a class="reference internal" href="#headings">Headings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rst-file-formatting">RST file formatting</a></li>
+<li><a class="reference internal" href="#content-highlighting">Content highlighting</a></li>
+<li><a class="reference internal" href="#tables">Tables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="building_the_docs.html"
+                        title="previous chapter">Building the documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/doc_styleguide.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="building_the_docs.html" title="Building the documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Test repo  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Documentation style guide</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Nordic Semiconductor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+    </div>
+  </body>
+</html>

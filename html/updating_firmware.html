@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTA-DFU with nRF Connect &#8212; Test repo  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Building the documentation" href="building_the_docs.html" />
+    <link rel="prev" title="Upgrading with nRF Connect for Mobile" href="upgrade.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="building_the_docs.html" title="Building the documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="upgrade.html" title="Upgrading with nRF Connect for Mobile"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Test repo  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ota_dfu.html" accesskey="U">Over-the-air device firmware update (OTA-DFU)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">OTA-DFU with nRF Connect</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ota-dfu-with-nrf-connect">
+<span id="updating-firmware"></span><h1>OTA-DFU with nRF Connect<a class="headerlink" href="#ota-dfu-with-nrf-connect" title="Permalink to this headline">¶</a></h1>
+<p>You can run a device firmware update (DFU) using Nordic Semiconductor’s nRF Connect for Desktop application.</p>
+<div class="section" id="updating-with-nrf-connect-for-desktop">
+<h2>Updating with nRF Connect for Desktop<a class="headerlink" href="#updating-with-nrf-connect-for-desktop" title="Permalink to this headline">¶</a></h2>
+<p>The following procedure involves using a desktop device and a connectivity board to run DFU.</p>
+<p>Install the following software on your computer before running this procedure:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Connect-for-desktop">nRF Connect for Desktop</a></p></li>
+<li><p><a class="reference external" href="https://github.com/NordicSemiconductor/pc-nrfutil">nRF Util</a></p></li>
+</ul>
+<p>You also need either an nRF51 DK or an nRF52 DK that will function as a connectivity board during DFU.</p>
+<ol class="arabic">
+<li><p>Connect a development kit to your computer through the USB port.
+This DK will serve as an intermediate connectivity board.</p></li>
+<li><p>Run nRF Connect for Desktop.
+From the list of ports, choose the serial port where the connectivity board is connected.</p>
+<div class="figure align-default" id="id1">
+<img alt="Select the board in nRF Connect" src="_images/nrf_connect_d_1.png" />
+<p class="caption"><span class="caption-text">Select the board in nRF Connect</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Click <span class="guilabel">Start Scan</span> and locate your device in the list of discovered devices.
+Make sure the device is not bonded to another host.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The list of discovered devices is not automatically refreshed when they stop advertising.
+Whenever you have problems connecting to a device from the list, try clearing it and rerunning the scan.</p>
+</div>
+</li>
+<li><p>Connect to your device.
+When connecting, you do not need to select any of the optional settings.</p></li>
+<li><p>Expand the FE59 service section and enable notifications by clicking <span class="guilabel">Toggle notifications</span>.
+Then, type <code class="docutils literal notranslate"><span class="pre">01</span></code> into the FE59 field.
+Press Enter or click <span class="guilabel">Write</span>.</p>
+<div class="figure align-default" id="id2">
+<img alt="FE59 service section" src="_images/fe59.png" />
+<p class="caption"><span class="caption-text">FE59 service section</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>The device now enters DFU mode.
+You are disconnected from the device and, if you run a new scan, your device appears as new device with “Dfu” added to the device name.</p>
+</li>
+<li><p>Close nRF Connect.
+Make sure that nRF Connect and nRF Util applications do not run at the same time.</p></li>
+<li><p>With nRF Util installed, open the command prompt and run the following command, where <code class="docutils literal notranslate"><span class="pre">&lt;ic_name&gt;</span></code> is the series of the connectivity board (NRF51 or NRF52) and <code class="docutils literal notranslate"><span class="pre">&lt;package_name.zip&gt;</span></code> is the path to the zip file that is to be transferred to the device:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nrfutil</span> <span class="n">dfu</span> <span class="n">ble</span> <span class="o">-</span><span class="n">ic</span> <span class="o">&lt;</span><span class="n">ic_series</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">pkg</span> <span class="o">&lt;</span><span class="n">package_name</span><span class="o">.</span><span class="n">zip</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nrfutil</span> <span class="n">dfu</span> <span class="n">ble</span> <span class="o">-</span><span class="n">ic</span> <span class="n">NRF51</span> <span class="o">-</span><span class="n">pkg</span> <span class="s2">&quot;new_firmware.zip&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>You might be prompted to select the connectivity serial port.
+Select the port that the connectivity board is connected to and press Enter.
+A progress bar will appear showing the progress of the package transfer.</p></li>
+</ol>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OTA-DFU with nRF Connect</a><ul>
+<li><a class="reference internal" href="#updating-with-nrf-connect-for-desktop">Updating with nRF Connect for Desktop</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="upgrade.html"
+                        title="previous chapter">Upgrading with nRF Connect for Mobile</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="building_the_docs.html"
+                        title="next chapter">Building the documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/updating_firmware.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="building_the_docs.html" title="Building the documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="upgrade.html" title="Upgrading with nRF Connect for Mobile"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Test repo  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="ota_dfu.html" >Over-the-air device firmware update (OTA-DFU)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">OTA-DFU with nRF Connect</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Nordic Semiconductor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+    </div>
+  </body>
+</html>
