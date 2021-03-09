@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Test repo'
-copyright = '2020, Nordic Semiconductor'
+copyright = '2021, Nordic Semiconductor'
 author = 'Nordic Semiconductor'
 
 
